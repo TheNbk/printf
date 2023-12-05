@@ -30,9 +30,9 @@ static int	type_letters(const char c, va_list args)
 	else if (c == 'u')
 		len += ft_putnbr_2(va_arg(args, unsigned int));
 	else if (c == 'x')
-		len += ft_putnbr_hexa(va_arg(args, unsigned long int), 16, 0);
+		len += ft_putnbr_hexa(va_arg(args, unsigned int), 16, 0);
 	else if (c == 'X')
-		len += ft_putnbr_hexa(va_arg(args, unsigned long int), 16, 1);
+		len += ft_putnbr_hexa(va_arg(args, unsigned int), 16, 1);
 	return (len);
 }
 
