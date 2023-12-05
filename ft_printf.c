@@ -6,7 +6,7 @@
 /*   By: chayashi <caarlostol@student.42.rio>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 19:33:10 by chayashi          #+#    #+#             */
-/*   Updated: 2023/11/30 20:40:04 by chayashi         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:23:49 by chayashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ static int	type_letters(const char c, va_list args)
 	else if (c == 'd' || c == 'i')
 		len += ft_putnbr(va_arg(args, int));
 	else if (c == 'u')
-		len += ft_putnbr(va_arg(args, unsigned int));
+		len += ft_putnbr_2(va_arg(args, unsigned int));
 	else if (c == 'x')
-		len += ft_putnbr_hexa(va_arg(args, unsigned int), 16, 0);
+		len += ft_putnbr_hexa(va_arg(args, unsigned long int), 16, 0);
 	else if (c == 'X')
-		len += ft_putnbr_hexa(va_arg(args, unsigned int), 16, 1);
+		len += ft_putnbr_hexa(va_arg(args, unsigned long int), 16, 1);
 	return (len);
 }
 
@@ -51,8 +51,10 @@ int	ft_printf(const char *format, ...)
 			len += type_letters(*format, args);
 		}
 		else
+		{
 			ft_putchar(*format);
-		len++;
+			len++;
+		}
 		format++;
 	}
 	va_end (args);

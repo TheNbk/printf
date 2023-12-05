@@ -6,7 +6,7 @@
 /*   By: chayashi <caarlostol@student.42.rio>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 13:56:14 by chayashi          #+#    #+#             */
-/*   Updated: 2023/11/30 19:50:14 by chayashi         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:35:44 by chayashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_putstr(const char *s)
 
 	len = 0;
 	if (!s)
-		return (ft_putstr("(NULL)"));
+		return (ft_putstr("(null)"));
 	while (*s)
 	{
 		write(1, s++, 1);
@@ -32,32 +32,22 @@ int	ft_putstr(const char *s)
 	return (len);
 }
 
-int	ft_putnbr(int nb)
+int	ft_putnbr_2(unsigned int nb)
 {
 	int	len;
 
 	len = 0;
-	if (nb == -2147483648)
+	if (nb > 9)
 	{
-		len += write(1, "-2147483648", 11);
-	}
-	else if (nb < 0)
-	{
-		len += ft_putchar('-');
-		nb *= -1;
-		len += ft_putnbr(nb);
-	}
-	else if (nb > 9)
-	{
-		len += ft_putnbr(nb / 10);
-		len += ft_putnbr(nb % 10);
+		len += ft_putnbr_2(nb / 10);
+		len += ft_putnbr_2(nb % 10);
 	}
 	else
 		len += ft_putchar(nb + 48);
 	return (len);
 }
 
-int	ft_putnbr_hexa(unsigned int nb, unsigned int base, int upper)
+int	ft_putnbr_hexa(unsigned long int nb, unsigned int base, int upper)
 {
 	int		len;
 	char	*type;
@@ -77,12 +67,12 @@ int	ft_putnbr_hexa(unsigned int nb, unsigned int base, int upper)
 	return (len);
 }
 
-int	ft_putptr(long unsigned int ptr)
+int	ft_putptr(unsigned long int ptr)
 {
 	int	letters;
 
 	if (!ptr)
-		return (ft_putstr("(NULL)"));
+		return (ft_putstr("(nil)"));
 	letters = 0;
 	letters += ft_putstr("0x");
 	letters += ft_putnbr_hexa(ptr, 16, 0);

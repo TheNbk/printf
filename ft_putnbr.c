@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chayashi <caarlostol@student.42.rio>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 19:37:31 by chayashi          #+#    #+#             */
-/*   Updated: 2023/12/05 18:22:11 by chayashi         ###   ########.fr       */
+/*   Created: 2023/12/05 18:31:47 by chayashi          #+#    #+#             */
+/*   Updated: 2023/12/05 18:35:19 by chayashi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <stdarg.h>
+int	ft_putnbr(int nb)
+{
+	int	len;
 
-int	ft_printf(const char *format, ...);
-int	ft_putchar(const char c);
-int	ft_putstr(const char *c);
-int	ft_putnbr(int nb);
-int	ft_putnbr_2(unsigned int nb);
-int	ft_putnbr_hexa(unsigned long int nb, unsigned int base, int is_upper);
-int	ft_putptr(unsigned long int ptr);
-
-#endif
+	len = 0;
+	if (nb == -2147483648)
+		len += write(1, "-2147483648", 11);
+	else if (nb < 0)
+	{
+		len += ft_putchar('-');
+		nb = -nb;
+		len += ft_putnbr(nb);
+	}
+	else if (nb > 9)
+	{
+		len += ft_putnbr(nb / 10);
+		len += ft_putnbr(nb % 10);
+	}
+	else
+		len += ft_putchar(nb + 48);
+	return (len);
+}
