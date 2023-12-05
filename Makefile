@@ -16,6 +16,7 @@ HEADER		=	ft_printf.h
 
 SRC		=	ft_printf.c \
 			ft_functions.c \
+			ft_putnbr.c \
 
 OBJ		=	$(SRC:.c=.o)
 
